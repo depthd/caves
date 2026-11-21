@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071213"><link rel="icon" href="data:,"><title>НИЖЕ — экспедиция в разлом</title></head>
+<body>
+  <main id="app">
+    <canvas id="world" aria-label="Трёхмерная пещера"></canvas>
+    <div class="vignette"></div>
+    <header>
+      <a class="brand" href="/" aria-label="НИЖЕ, начало"><span class="brand-mark">⋁</span> НИЖЕ</a>
+      <div class="top-right"><span class="status-dot"></span><span id="mode-label">ИССЛЕДОВАНИЕ РАЗЛОМА</span><button id="sound" aria-label="Включить звук" aria-pressed="false" title="Звук">ЗВУК: ВЫКЛ</button></div>
+    </header>
+    <section class="intro" id="intro">
+      <div class="eyebrow"><span></span> ПОД ЗАБЫТОЙ ШАХТОЙ</div>
+      <h1>Чем глубже,<br>тем <em>неизвестнее.</em></h1>
+      <p>Последний подъёмник остался наверху.<br>Внизу всё ещё горит чей-то свет.</p>
+      <div class="intro-actions"><button class="primary" id="enter">Начать спуск <span aria-hidden="true">↓</span></button><button class="secondary" id="tour">Осмотреть маршрут <span aria-hidden="true">→</span></button></div>
+    </section>
+    <aside class="depth-panel">
+      <div class="small-label">ГЛУБИНА</div><div class="depth-value"><span id="depth">42</span><small>м</small></div>
+      <div class="depth-track"><span id="depth-marker"></span><i></i><i></i><i></i><i></i><i></i></div>
+      <span class="zone-number" id="zone-number">01 / 03</span><strong id="zone">Старая выработка</strong>
+    </aside>
+    <div class="crosshair" id="crosshair"></div>
+    <div class="prompt" id="prompt" hidden><kbd>E</kbd> Изучить кристалл</div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <section class="route-card" id="route-card">
+      <div class="map-heading"><span class="small-label">СХЕМА СПУСКА</span><span class="map-live">●</span></div>
+      <canvas id="map" width="420" height="290" aria-label="Схема маршрута с текущим положением"></canvas>
+      <div class="map-legend"><span><i></i> Маршрут</span><span><i class="amber"></i> Мост</span><span>Образцы <b id="samples">0 / 3</b></span></div>
+    </section>
+    <footer>
+      <div class="seed-control"><label for="seed">SEED</label><input id="seed" value="CHASM-014" maxlength="32" aria-label="Seed генерации"><button id="regenerate" title="Создать другой разлом" aria-label="Создать другой разлом">↻</button></div>
+      <div class="controls" id="controls"><span><kbd>W A S D</kbd> движение</span><span><kbd>МЫШЬ</kbd> обзор</span><span><kbd>F</kbd> фонарь</span></div>
+      <div class="view-actions"><button id="overview">Свободная камера</button><button id="home" hidden>К началу</button><button id="help" aria-label="Инструкция">?</button></div>
+    </footer>
+    <div id="touch-controls" aria-label="Управление на сенсорном экране">
+      <div class="touch-directions">
+        <button data-key="KeyW" aria-label="Вперёд">↑</button>
+        <button data-key="KeyA" aria-label="Влево">←</button>
+        <button data-key="KeyS" aria-label="Назад">↓</button>
+        <button data-key="KeyD" aria-label="Вправо">→</button>
+      </div>
+      <div class="touch-actions"><button id="touch-lamp">Фонарь</button><button id="touch-sample" disabled>Образец</button></div>
+    </div>
+    <dialog id="help-dialog"><button id="close-help" aria-label="Закрыть">×</button><h2>Как исследовать разлом</h2><p>Найдите три светящихся образца вдоль маршрута и изучите их клавишей E. На сенсорном экране используйте кнопки движения и ведите пальцем по сцене для обзора.</p><dl><dt>W A S D</dt><dd>Движение</dd><dt>Мышь / ← →</dt><dd>Обзор. Без захвата курсора зажмите левую кнопку мыши.</dd><dt>Shift</dt><dd>Быстрый шаг</dd><dt>F</dt><dd>Фонарь</dd><dt>Esc</dt><dd>Освободить курсор</dd></dl><p class="help-note">В свободной камере перетаскивайте сцену, чтобы повернуть вид. Колесо меняет расстояние. При пешем спуске края маршрута защищают от падения.</p></dialog>
+    <div id="fatal" hidden role="alert"></div>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
